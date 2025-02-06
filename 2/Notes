@@ -177,6 +177,62 @@ public class TestClass{
     }
 }
 
+Generic class example:
+public class Box<T> {
+  private T value;
+  
+  public void set(T value) {
+  this.value = value;
+  }
+  
+  public T get() {
+    return value;
+  }
+}
+Box<Integer> box = new Box<>();
+box.set(5);
+box.get();
+Box<String> box = new Box<>();
+box.set("Kumar");
+box.get();
+
+Generic method example:
+public class Utilities {
+	public static <T> void swap(T[] arr, int i, int j){
+		T temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+	}
+}
+Integer[] numbers = {1,2,3,4};
+Utilities.swap(numbers, 0, 2);
+System.out.println(Arrays.toString(numbers));
+Key Rule 🚀
+1️⃣ If T is defined at the class level, methods can use it without declaring it again.
+2️⃣ If the method is generic but the class is not, <T> must be declared before the return type.
+
+Genrics on Interface:
+interface Comparable<T> {
+  int compareTo(T 0);
+}
+
+public class Person implements Comparable<Person> {
+	String name;
+	int age;
+	
+	//constructor
+	
+	@Override
+	int compareTo(Person other) {
+	   return Integer.compare(this.age, other.age);
+	}
+}
+List<Person> personList = new ArrayList<>();
+personList.add(new Person("kumar",33);
+personList.add(new Person("goms",31);
+
+Collections.sort(personList);
+
 SUPER:
 use super when u have overridden an implementation and still you want the parent class's implementation.
 use super in ur subclass constructor to set values of inherited variables.. 
@@ -213,16 +269,6 @@ Invoke current class method
 Return the current class object
 Pass an argument in the method call
 Pass an argument in the constructor call
-
-Animal(String noise){
-this.noise = noise;
-}
-Animal(){			-> u can call static method
-   this(makeNoise());
-}
-static String makeNoise(){
-
-}
 
 this can be used to call a constructor from other constructor to set values etc.
 public class Dog{
@@ -267,6 +313,41 @@ diff between abstract class n interface is :
 1. multiple interfaces can be implemented but we can extend only 1 abstract class.
 2. variables/fields declared inside interface is static and final so they must be initialized.
 
+JAVA 8 
+Functional interface:
+
+Predicate:
+Takes an input and returns a boolean
+filter() uses predicate
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        Predicate<Integer> isEven = num -> num % 2 == 0;
+
+        List<Integer> evenNumbers = numbers.stream()
+                                           .filter(isEven)
+                                           .collect(Collectors.toList());
+
+Consumer: Consumes an input but not output.
+forEach() uses consumer.
+        List<String> employees = Arrays.asList("Alice", "Bob", "Charlie");
+        Consumer<String> printEmployee = name -> System.out.println("Employee: " + name);
+
+        employees.forEach(printEmployee);
+		
+Function: Takes an input and returns an output. "apply()" method is used to invoke.
+public class FunctionExample {
+    public static void main(String[] args) {
+        Function<String, String> toUpperCase = str -> str.toUpperCase();
+
+        System.out.println(toUpperCase.apply("hello")); // Output: HELLO
+    }
+}
+Supplier: Returns an output without consuming an input.
+public static void main(String[] args) {
+        Supplier<Integer> randomNumber = () -> new Random().nextInt(100);
+
+        System.out.println(randomNumber.get()); // Random number between 0-99
+    }
 
 DOWNCASTING : instanceof 
 public static void doAnimalStuff(Animal animal){
@@ -681,6 +762,11 @@ public static void main(String[] args) {
 Cat can implement multiple interfaces each of which can have a static implementation. 
 Therefore, the compiler would not know which one to choose?
 
+
+COMMAND LINE ARGUMENTS:
+Apache common CLI module.
+Using CommandLineParser class 
+CommandLineParser parser = new DefaultParser();
 
 CLASS LOADERS:
 class loaders are hierarchical. Class loaders creates a names space. the very first classes is loaded with static main().
