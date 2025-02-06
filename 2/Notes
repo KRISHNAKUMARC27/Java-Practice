@@ -101,6 +101,23 @@ Using interfaces and abstract classes
 
 Singleton:
 private constructor with public method to instantiate the class if not already (lazy)
+public class Singleton {
+    private static volatile Singleton instance;
+
+    private Singleton() {}
+
+    public static Singleton getInstance() {
+        if (instance == null) {
+            synchronized (Singleton.class) {
+                if (instance == null) {
+                    instance = new Singleton();
+                }
+            }
+        }
+        return instance;
+    }
+}
+
 
 Factory:
 Object creation happens in the factory
@@ -541,7 +558,7 @@ intern()
  
  String Concatenation Operator +
 If only one operand expression is of type String, 
-then string conversion (§5.1.11) is performed on the other operand to produce a string at run time.
+then string conversion (Â§5.1.11) is performed on the other operand to produce a string at run time.
 
 The AutoClosable interface consists of just one method. void close() throws Exception {}. 
 Each AutoClosable resource created in the try statement will be automatically closed without requiring a finally block. 
@@ -551,7 +568,7 @@ Think of the close( ) method as implicitly being called as the last line in the 
 If using Java 7 or later editions, use AutoCloseable statements within the try block for more concise & readable code.
 
 Java 7: When a resource (i.e. dbConnect) is defined outside the try-with-resource block you need to close it explicitly in the finally block. 
-You can’t define an object reference in your try-with-resource block, which was a bug.
+You canÂ’t define an object reference in your try-with-resource block, which was a bug.
 
 Connection dbConnect = DriverManager.getConnection("db-url", "db-user", "db-password");
 try (ResultSet rs = dbConnect.createStatement().executeQuery("select * from mytable")) {
@@ -579,8 +596,8 @@ try (dbConnect; ResultSet rs = dbConnect.createStatement().executeQuery("select 
 Final modifier on a reference variable just means that the reference cannot be changed to reference a different object once assigned. 
 This does not mean that the variable is a constant because the values of the object it refers to can be modified 
 unless the values themselves are marked as final. 
-For example, an Employee object marked as final may have member variables “firstName”, and “lastName”. 
-The values of “firstName”, and “lastName” can be modified if they themselves are not marked as final.
+For example, an Employee object marked as final may have member variables Â“firstNameÂ”, and Â“lastNameÂ”. 
+The values of Â“firstNameÂ”, and Â“lastNameÂ” can be modified if they themselves are not marked as final.
 
 https://www.java-success.com/core-java-interview-questions/
 https://www.java-success.com/java-multithreading-interview-questions-and-answers/
@@ -595,7 +612,7 @@ The garbage collection cannot be forced. The garbage collector runs in low memor
 When it runs, it releases the memory allocated by an unreachable object. 
 The garbage collector runs on a separate JVM created low priority daemon (i.e. background) thread. 
 You can nicely ask the garbage collector to prioritise the garbage collection by calling System.gc( ) 
-but you can’t force it.
+but you canÂ’t force it.
 
 What is the difference between yield and sleep? What is the difference between the methods sleep( ) and wait( )?
 A7. When a task invokes yield( ), it changes from running state to runnable state. When a task invokes sleep ( ), 
@@ -606,7 +623,7 @@ A thread could wait less than 1 second if it receives the notify( ) or notifyAll
 The call to sleep(1000) causes the current thread to sleep for at least 1 second.
 We can use Thread class sleep() method to pause the execution of Thread for certain time. 
 Note that this will not stop the processing of thread for specific time, 
-once the thread awake from sleep, it’s state gets changed to runnable and based on thread scheduling,
+once the thread awake from sleep, itÂ’s state gets changed to runnable and based on thread scheduling,
  it gets executed.
 
 java.util.Timer is a utility class that can be used to schedule a thread to be executed at a certain time in future. 
@@ -673,7 +690,7 @@ class loaders have parent child relationship which ensures that child wont load 
 Java packages are namespaces. They allow programmers to create small private areas in which to declare classes. 
 The names of those classes will not collide with identically named classes in different packages.
 
-Classes are statically loaded with Java’s “new” operator.
+Classes are statically loaded with JavaÂ’s Â“newÂ” operator.
    Car c = new Car( );
 
 Dynamic loading is a technique for programmatically invoking the functions of a classloader at runtime.
@@ -733,7 +750,7 @@ java -XX:+HeapDumpOnOutOfMemoryError
 If we open JConsole and connect to a running Java process, 
 we can navigate to the MBeans tab and find the HotSpotDiagnostic under com.sun.management. 
  
- What is a “transient” modifier? Can you mark a static variable as transient?
+ What is a Â“transientÂ” modifier? Can you mark a static variable as transient?
 A5.  It marks a member variable not to be serialized when it is persisted to streams of bytes. 
 It cannot be used with a static variable as a static variable belongs to a class, not to an object. 
 You can only serialize an object.
@@ -749,9 +766,9 @@ If there's a mismatch, it throws ConcurrentModificationException which aborts th
 
 Default iterators for Collections from java.util package such as ArrayList, HashMap, etc. are Fail-Fast.
 
-If during iteration over a Collection, an item is removed using Iterator‘s remove() method, 
+If during iteration over a Collection, an item is removed using IteratorÂ‘s remove() method, 
 that's entirely safe and doesn't throw an exception.
-However, if the Collection‘s remove() method is used for removing an element, it throws an exception.
+However, if the CollectionÂ‘s remove() method is used for removing an element, it throws an exception.
 
 Fail-Safe iterators favor lack of failures over the inconvenience of exception handling.
 Those iterators create a clone of the actual Collection and iterate over it. 
@@ -765,15 +782,15 @@ Iterators on Collections from java.util.concurrent package such as ConcurrentHas
 CopyOnWriteArrayList, etc. are Fail-Safe in nature.
 
 Serializable is a marker interface (has no data member and method). 
-It is used to “mark” java classes so that objects of these classes may get certain capability. 
+It is used to Â“markÂ” java classes so that objects of these classes may get certain capability. 
 Other examples of marker interfaces are:- Cloneable and Remote.
 
 Points to remember
 1. If a parent class has implemented Serializable interface then 
-child class doesn’t need to implement it but vice-versa is not true.
+child class doesnÂ’t need to implement it but vice-versa is not true.
 2. Only non-static data members are saved via Serialization process.
 3. Static data members and transient data members are not saved via Serialization process.
-So, if you don’t want to save value of a non-static data member then make it transient.
+So, if you donÂ’t want to save value of a non-static data member then make it transient.
 4. Constructor of object is never called when an object is deserialized.
 5. Associated objects must be implementing Serializable interface.
 
@@ -784,7 +801,7 @@ SerialVersionUID
 The Serialization runtime associates a version number with each Serializable class called a SerialVersionUID, 
 which is used during Deserialization to verify that sender and receiver of a serialized object have loaded classes for that object 
 which are compatible with respect to serialization. 
-If the receiver has loaded a class for the object that has different UID than that of corresponding sender’s class,
+If the receiver has loaded a class for the object that has different UID than that of corresponding senderÂ’s class,
  the Deserialization will result in an InvalidClassException. 
  A Serializable class can declare its own UID explicitly by declaring a field name.
 It must be static, final and of type long.
@@ -809,7 +826,7 @@ JVM is a part of JRE(Java Runtime Environment).
 JRE (Java Runtime Environment): JRE refers to a runtime environment in which Java bytecode can be executed. 
 It implements the JVM (Java Virtual Machine) and provides all the class libraries and other support files that JVM uses at runtime. 
 So JRE is a software package that contains what is required to run a Java program. 
-Basically, it’s an implementation of the JVM which physically exists. 
+Basically, itÂ’s an implementation of the JVM which physically exists. 
 JDK(Java Development Kit): It is the tool necessary to compile, document and package Java programs.
 The JDK completely includes JRE which contains tools for Java programmers. 
 The Java Development Kit is provided free of charge. Along with JRE, it includes an interpreter/loader, a compiler (javac), 
